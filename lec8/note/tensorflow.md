@@ -22,4 +22,4 @@ question：
 
 softmax模型
 
-
+np.linspace
