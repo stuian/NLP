@@ -36,7 +36,7 @@ Given an input x (e.g., an input character, word or sentence depending on the gr
 
 G（补充）:
 
-1.jpg
+![](https://github.com/stuian/NLP/blob/master/lec12/images/1.jpg?raw=true)
 
 I(x)存储在记忆m中的一个位置，H(x)是一个位置选取函数（slot choosing functionH），用来指定I(x)在记忆中的位置。
 
@@ -72,7 +72,7 @@ R：
 
 > using an embedding model to represent text
 
-- S(x) returns the next empty memory slot N:image2
+- S(x) returns the next empty memory slot N:![](https://github.com/stuian/NLP/blob/master/lec12/images/2.jpg?raw=true)
 - The G module is thus only used to store this new memory, so old memories are not updated.
 - The core of inference lies in the O and R modules.
 
@@ -80,10 +80,10 @@ R：
 
 k = 1,分数最高的支撑记忆通过下列公式计算：
 
-image3
+![](https://github.com/stuian/NLP/blob/master/lec12/images/3.jpg?raw=true)
 
 > sO is a function that scores the match between the pair of sentences x and mi.
 
 k = 2
 
-image4 
+![](https://github.com/stuian/NLP/blob/master/lec12/images/4.jpg?raw=true)
