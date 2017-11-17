@@ -1,5 +1,11 @@
 ## 解读论文：Memory Networks ##
 
+中文博客参考链接：
+
+1、[http://m.blog.csdn.net/wang735019/article/details/53909079](http://m.blog.csdn.net/wang735019/article/details/53909079)
+
+2、[http://blog.csdn.net/u011274209/article/details/53384232?ref=myread](http://blog.csdn.net/u011274209/article/details/53384232?ref=myread)
+
 memory networks有两部分，inference components和long-term memory components(在别人的基础上新增的:可以被用来读取和写入)
 
 论文中：
@@ -52,6 +58,8 @@ R：
 
 可以是一个建立在O的输出基础上的RNN。
 
+![](http://img.blog.csdn.net/20161229094352510?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWZudV9janRfd2w=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 ### 二、A MEMNN IMPLEMENTATION FOR TEXT ###
 
 > MEMNN是本文介绍的模型
@@ -87,3 +95,22 @@ k = 1,分数最高的支撑记忆通过下列公式计算：
 k = 2
 
 ![](https://github.com/stuian/NLP/blob/master/lec12/images/4.jpg?raw=true)
+
+#### response: ####
+
+![](https://github.com/stuian/NLP-CS224d/blob/master/lec12/images/1.png?raw=true)
+
+整个模型过程的关键在函数s(x,y) 的实现。
+
+> so(x,y)和sr(x,y)是一样的
+
+其中参数U的维度为nXD , D代表特征的数量，n代表嵌入维度。Φx和Φy 将原始的输入文本映射到D维的特征空间。文章中D=3|W| ，W是词表大小。
+![](http://img.blog.csdn.net/20161230213726715?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWZudV9janRfd2w=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+词典中的每个词都有3种不同的表示方式，其中一份给予Φy，另两份给Φx。若输入x是问题中的词，则映射在位置1，若输入词是“记忆支撑”，那么映射在位置2，y映射在位置3。若其中某个位置未映射则置0。 
+
+
+### 训练 ###
+
+模型的训练是一个监督学习的过程，使用最大距离损失和梯度下降法训练参数。
+
+[http://img.blog.csdn.net/20161230215314460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWZudV9janRfd2w=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast](http://img.blog.csdn.net/20161230215314460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWZudV9janRfd2w=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
