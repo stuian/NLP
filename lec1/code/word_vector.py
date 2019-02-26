@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-corpus_raw = 'He is the king.The king is royal.She is the royal queen'
+corpus_raw = 'He is the king . The king is royal . She is the royal queen'
 
 #convert to lower case
 corpus_raw = corpus_raw.lower()
@@ -10,7 +10,7 @@ words = []
 for word in corpus_raw.split():
     if word != '.':
         words.append(word)
-words = set(words) #remove the duplicate words
+words = set(words) #remove the duplicate words:{'royal', 'she', 'king', 'he', 'the', 'is', 'queen'}
 word2int = {}
 int2word = {}
 vocab_size = len(words)
@@ -39,6 +39,8 @@ for sentence in sentences:
                 data.append([word,nb_word])
                 # the couple of input and output
 
+# print(data) # [['he', 'is'], ['he', 'the'],...]
+
 #convert couple of word to numbers ,then continue to turn from numbers to one-hot
 def to_one_hot(data_point_index,vocab_size):
     temp = np.zeros(vocab_size)
@@ -47,7 +49,7 @@ def to_one_hot(data_point_index,vocab_size):
 
 x_train = []
 y_train = []
-print(x_train)
+
 for data_word in data:
     x_train.append(to_one_hot(word2int[data_word[0]],vocab_size))
     y_train.append(to_one_hot(word2int[data_word[1]],vocab_size))
@@ -60,14 +62,15 @@ y_train = np.asarray(y_train)
 x = tf.placehodler(tf.float32,shape=(None,vocab_size))
 y_label = tf.placeholder(tf.float32,shape=(None,vocab_size))
 
-EMBEDDING_DIM = 5
+EMBEDDING_DIM = 5 #embedding dimension
 w1 = tf.Variable(tf.random_normal([vocab_size,EMBEDDING_DIM]))
 b1 = tf.Variable(tf.random_normal([EMBEDDING_DIM]))
 
 hidden_representation = tf.add(tf.matmul(x,w1),b1)
+# hidden_representation stands for embedding vector
 
 #deal with hidden layer
-#predice the surrounding words
+#predict the surrounding words
 w2 = tf.Variable(tf.random_normal([EMBEDDING_DIM,vocab_size]))
 b2 = tf.Variable(tf.random_normal([vocab_size]))
 prediction = tf.nn.softmax(tf.add(tf.matmul(hidden_representation,w2),b2))
@@ -76,10 +79,15 @@ sess = tf.Session()
 init = tf.global_variables_initializer()
 sess.run(init)
 
+# cost function
 cross_entropy_loss = tf.reduce_mean(-tf.reduce_sum(y_label*tf.log(prediction),reduction_indices=[1]))
-train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cross_entropy_loss)
-n_iters = 10000
 
-for _ in range(n_iters):
+# optimization function
+train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cross_entropy_loss)
+
+# iteration
+n_iters = 10000
+for i in range(n_iters):
     sess.run(train_step,feed_dict={x:x_train,y_label:y_train})
+    print("%diter,",i)
     print('loss is :',sess.run(cross_entropy_loss,feed_dict={x:x_train,y_label:y_train}))
