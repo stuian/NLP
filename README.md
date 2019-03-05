@@ -1,2 +1,3 @@
-# NLP
-deep Nature language Process
+# notes of cs224d and cs224n
+
+1.word vector
