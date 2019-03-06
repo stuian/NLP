@@ -32,5 +32,15 @@
 
 ### 3 基于迭代-word2vector
 
-### 3.1 基础-nnlm
+### 3.1 基础-nnlm（神经网络语言模型）
+
+nnlm以n-grams为基础：
+
+
+
+![](https://github.com/stuian/NLP-CS224d/blob/master/01wordvector/pictures/nnlm.jpg?raw=true)
+
+
+
+
 
