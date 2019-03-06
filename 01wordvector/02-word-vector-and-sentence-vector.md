@@ -30,3 +30,7 @@
 
 ![](https://img-blog.csdn.net/20180301170056165?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWUUxMjE1MTcyMzg1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
+### 3 基于迭代-word2vector
+
+### 3.1 基础-nnlm
+
