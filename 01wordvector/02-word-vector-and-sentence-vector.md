@@ -55,6 +55,19 @@ nnlm以n-grams为基础：
 预测一下，在这10000个词中，出现哪个词的概率最大，最终得到是概率矩阵。已知标签的情况下，如果预测出来的不准确，就可以通过定义一个交叉熵损失函数来计算损失，通过BP算法来调整参数C。
 
 
+### 3.2 CBOW
 
+![](https://github.com/stuian/NLP-CS224d/blob/master/01wordvector/pictures/CBOM.jpg?raw=true)
 
+一张图表示如下：
+
+![](http://i.stack.imgur.com/fYxO9.png)
+
+> 当词语wi（译注：wi是只有第i维是1其他维是0的one-hot向量）作为模型的一个输入的时候，V的第i列就是它的n维“嵌入向量”（embedded vector）。我们将V的这一列表示为vi。类似的，U是输出矩阵。当wj作为模型输出的时候，U的第j行就是它的n维“嵌入向量”。我们将U的这一行表示为uj。
+
+### 3.3 skip-gram
+
+和cbom相反，通知中心词预测上下文的词
+
+![](http://i.stack.imgur.com/igSuE.png)
 
