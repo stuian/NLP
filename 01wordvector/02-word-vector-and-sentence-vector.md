@@ -36,9 +36,23 @@
 
 nnlm以n-grams为基础：
 
+![](https://github.com/stuian/NLP-CS224d/blob/master/01wordvector/pictures/3-grams.jpg?raw=true)
 
+即预测一个句子发生的最大概率
 
 ![](https://github.com/stuian/NLP-CS224d/blob/master/01wordvector/pictures/nnlm.jpg?raw=true)
+
+1、project layer：
+
+矩阵c是个DxV（每一列代表一个词向量），用一个词one-hot向量去乘以c矩阵就可以得到该词的词向量；
+
+2、hidden layer：
+
+全连接+tanh激活函数
+
+3、softmax分类器
+
+预测一下，在这10000个词中，出现哪个词的概率最大，最终得到是概率矩阵。已知标签的情况下，如果预测出来的不准确，就可以通过定义一个交叉熵损失函数来计算损失，通过BP算法来调整参数C。
 
 
 
