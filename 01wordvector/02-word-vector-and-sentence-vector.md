@@ -4,7 +4,7 @@
 
 没什么好说的。
 
-### 2 基于svd的方法
+### 2 基于计数的方法
 
 遍历所有的文本数据集，然后统计词出现的次数，接着用一个矩阵X来表示所有的次数情况，紧接着对X进行奇异值分解得到一个USVT的分解。然后用U的行（rows）作为所有词表中词的词向量。对于矩阵X，我们有几种选择，咱们一起来比较一下。
 
@@ -30,7 +30,13 @@
 
 ![](https://img-blog.csdn.net/20180301170056165?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvWUUxMjE1MTcyMzg1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
+### 2.3 TF-IDF
+
+
+
 ### 3 基于迭代-word2vector
+
+**我觉得最好的一个介绍的[笔记](https://upload-images.jianshu.io/upload_images/11395897-fe194a6bf8bfd3ba.png?imageMogr2/auto-orient/)**
 
 ### 3.1 基础-nnlm（神经网络语言模型）
 
@@ -63,6 +69,10 @@ nnlm以n-grams为基础：
 
 ![](http://i.stack.imgur.com/fYxO9.png)
 
+损失函数：
+
+![](https://github.com/stuian/NLP-CS224d/blob/master/01wordvector/pictures/cross-entropy.jpg?raw=true)
+
 > 当词语wi（译注：wi是只有第i维是1其他维是0的one-hot向量）作为模型的一个输入的时候，V的第i列就是它的n维“嵌入向量”（embedded vector）。我们将V的这一列表示为vi。类似的，U是输出矩阵。当wj作为模型输出的时候，U的第j行就是它的n维“嵌入向量”。我们将U的这一行表示为uj。
 
 ### 3.3 skip-gram
@@ -70,4 +80,22 @@ nnlm以n-grams为基础：
 和cbom相反，通知中心词预测上下文的词
 
 ![](http://i.stack.imgur.com/igSuE.png)
+
+损失函数：
+
+![](https://upload-images.jianshu.io/upload_images/11395897-fe194a6bf8bfd3ba.png?imageMogr2/auto-orient/)
+
+![](https://upload-images.jianshu.io/upload_images/11395897-6857677acedb230b.png?imageMogr2/auto-orient/)
+
+？怎么产生多个词，如何操作的
+
+### 3.4 负采样
+
+用编造的词汇来训练成为负采样。
+
+参考链接：https://www.jianshu.com/p/14ec26a5892b
+
+### 4 sentence vector
+
+求出每个词的词向量，求平均/连接（如果连接的话没法统一句子长度）
 
